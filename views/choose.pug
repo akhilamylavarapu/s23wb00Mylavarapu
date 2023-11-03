@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  - var image_names = ['denim.jpg', 'denim2.jpg', 'leather.png', 'pufferjacket.jpg', 'puffer2.jpg'];
+  div.d-flex.flex-column
+  - for(var i = 0; i < 3; i++) {
+      - var randomIndex = Math.floor(Math.random() * 5);
+      img(src=`/images/${image_names[randomIndex]}`, width = 300, height = 300, alt = "image not loaded.")
+  - }
