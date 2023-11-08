@@ -1,3 +1,27 @@
+//- extends layout
+
+//- block content
+//-   h1= title
+
+//-   div(class="container-fluid")
+//-     div(class="row")
+//-       - for(let i = 0; i < results.length; i++){
+//-         div(class="col-sm-2", style = 'cursor: pointer;', id = `res-${i}`) 
+//-           p JacketName: #{results[i].jacketNames}
+//-           p JacketCost: $#{results[i].jacketCost}
+//-           p JacketSize: #{results[i].jacketSize}
+
+//-         script.
+//-           document.getElementById(`res-${i}`).addEventListener('click', function() {
+//-             buy(i); 
+//-           });
+//-       - }
+//-     script.
+//-       function buy(index){
+//-         alert(`You purchased item ${index}`)
+//-       }
+
+
 extends layout
 
 block content
@@ -5,19 +29,20 @@ block content
 
   div(class="container-fluid")
     div(class="row")
-      - let results = [{jacketNames: "Puffer Jacket", jacketSize: "Small", jacketCost: 59}, {jacketNames: "Denim Jacket", jacketSize: "Medium", jacketCost: 75}, {jacketNames: "Leather Jacket", jacketSize: "Small", jacketCost: 159}]; 
       - for(let i = 0; i < results.length; i++){
-          div(class="col-sm-2", onclick = `buy(${i})`, style = 'cursor: pointer;', id=`jackets-${i}`) 
-            p JacketName: #{results[i].jacketNames}
-            p JacketCost: $#{results[i].jacketCost}
-            p JacketSize: #{results[i].jacketSize}
-          
-          script.
-            document.getElementById(`jackets-${i}`).addEventListener('click', function() {
-              buy(i); 
+        div(class="col-sm-2", style = 'cursor: pointer;', id = `res-${i}`) 
+          p JacketName: #{results[i].costume_type}
+          p JacketCost: $#{results[i].cost}
+          p JacketSize: #{results[i].size}
+
+        script.
+          (function(index) {
+            document.getElementById(`res-${index}`).addEventListener('click', function() {
+              buy(index); 
             });
+          })(i);
       - }
-      script.
-        function buy(index){
-          alert(`You purchased item ${index}`)
-        }
+    script.
+      function buy(index){
+        alert(`You purchased item ${index}`)
+      }
