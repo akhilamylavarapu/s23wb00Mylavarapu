@@ -33,7 +33,7 @@ var usersRouter = require('./routes/users');
 var jacketsRouter = require('./routes/jackets');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
-var coustumeRouter = require('./models/costume');
+var coustumeRouter = require('./models/jacket');
 var resourseRouter = require('./routes/resource');
 
 
@@ -53,7 +53,7 @@ app.use('/users', usersRouter);
 app.use('/jackets', jacketsRouter);
 app.use('/board', boardRouter);
 app.use('/choose',chooseRouter);
-app.use('/coustume',coustumeRouter);
+app.use('/jacket',coustumeRouter);
 app.use('/resourse',resourseRouter);
 
 

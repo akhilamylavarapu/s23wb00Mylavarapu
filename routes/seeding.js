@@ -1,6 +1,6 @@
-const Costume = require('../models/costume');
+const Jacket = require('../models/jacket');
 var express = require('express');
-const costume_controlers= require('../controllers/costumes');
+const costume_controlers= require('../controllers/jackets');
 var router = express.Router();
 
 /* GET costumes */
@@ -9,9 +9,9 @@ module.exports = router;
 
 
 async function recreateDB() {
-    await Costume.deleteMany();
+    await Jacket.deleteMany();
   
-    let instance1 = new Costume({
+    let instance1 = new Jacket({
       costume_type: "Puffer Jacket",
       size: 'Small',
       cost: 59
@@ -25,7 +25,7 @@ async function recreateDB() {
         console.error(err);
       });
 
-      let instance2 = new Costume({
+      let instance2 = new Jacket({
         costume_type: "Denim Jacket",
         size: 'medium',
         cost: 75
@@ -39,7 +39,7 @@ async function recreateDB() {
           console.error(err);
         });
 
-        let instance3 = new Costume({
+        let instance3 = new Jacket({
             costume_type: "Leather Jacket",
             size: 'small',
             cost: 159

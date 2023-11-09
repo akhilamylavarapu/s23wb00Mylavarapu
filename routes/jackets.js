@@ -9,7 +9,7 @@
 // module.exports = router;
 
 var express = require('express');
-const costume_controlers = require('../controllers/costumes');
+const costume_controlers = require('../controllers/jackets');
 var router = express.Router();
 
 /* GET costumes view */
