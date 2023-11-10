@@ -1,4 +1,4 @@
-const Jacket = require('../models/jacket');
+const Jacket = require('../models/jackets');
 var express = require('express');
 const costume_controlers= require('../controllers/jackets');
 var router = express.Router();

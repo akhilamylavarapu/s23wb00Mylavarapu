@@ -33,7 +33,7 @@ var usersRouter = require('./routes/users');
 var jacketsRouter = require('./routes/jackets');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
-var coustumeRouter = require('./models/jacket');
+var coustumeRouter = require('./models/jackets');
 var resourseRouter = require('./routes/resource');
 
 
