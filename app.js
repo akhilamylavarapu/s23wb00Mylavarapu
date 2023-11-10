@@ -53,8 +53,8 @@ app.use('/users', usersRouter);
 app.use('/jackets', jacketsRouter);
 app.use('/board', boardRouter);
 app.use('/choose',chooseRouter);
-app.use('/jacket',coustumeRouter);
-app.use('/resourse',resourseRouter);
+app.use('/coustume',coustumeRouter);
+app.use('/resource',resourseRouter);
 
 
 // catch 404 and forward to error handler
