@@ -1,0 +1,48 @@
+block content
+  h1= title
+  - let costumeid = result._id
+  - let costume_type = result.costume_type
+  - let costumecost = result.cost
+  - let costumesize = result.size
+
+  - let actionid = "/resource/jackets/" + costumeid
+  form(id='JacketForm', action = actionid, method="PUT")
+    div.form-group
+      label.costumeAttr(for='costume_type') Jacket type&nbsp;
+
+      input#costume_type(type='text', name='costume_type', value=costume_type)
+    div.form-group
+      label.costumeAttr(for='size') Jacket size&nbsp;
+
+      input#costumesize(type='text', name='size', value=costumesize)
+    div.form-group
+      label.costumeAttr(for='cost') Jacket cost&nbsp;
+
+      input#costumecost(type='number', name='cost', value=costumecost)
+
+    input#costumeid(type='hidden', name='id', value=costumeid)
+
+    input(type="submit")
+  script.
+    document.forms['JacketForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        if(resp.ok){
+            alert ("Jacket Updated Successfully")
+            document.getElementById('JacketForm').reset()
+        }
+        else {
+            alert (" File to Update Jacket")
+        }
+      }).then((body) => {
+        console.log(body)
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });
