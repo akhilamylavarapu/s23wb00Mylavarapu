@@ -1,4 +1,5 @@
 var Costume = require('../models/jackets');
+const ObjectId = require('mongodb').ObjectId;
 
 // List of all Costumes
 exports.costume_list = async function (req, res) {
@@ -61,18 +62,18 @@ exports.costume_create_post = async function (req, res) {
 
 
 // Handle Costume delete on DELETE.
-exports.costume_delete = async function(req, res) {
+exports.costume_delete = async function (req, res) {
     console.log("delete " + req.params.id)
     try {
-    result = await Costume.findByIdAndDelete( req.params.id)
-    console.log("Removed " + result)
-    res.send(result)
+        result = await Costume.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
     } catch (err) {
-    res.status(500)
-    res.send(`{"error": Error deleting ${err}}`);
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
     }
-    };
-    
+};
+
 
 // Handle Costume update form on PUT.
 exports.costume_update_put = async function (req, res) {
@@ -92,5 +93,20 @@ ${JSON.stringify(req.body)}`)
         res.status(500)
         res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
+    }
+};
+
+// Handle a show one view with id specified by query
+exports.costume_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        const id = new ObjectId(req.query.id);
+        result = await Costume.findById(id);
+        res.render('jacketdetail',
+            { title: 'Jacket Detail', result: result });
+    }
+    catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
 };
