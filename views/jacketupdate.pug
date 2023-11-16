@@ -1,47 +1,53 @@
 extends layout
 
 block content
+  head
+    title= title
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
+
   h1= title
   - let costumeid = result._id
   - let costume_type = result.costume_type
   - let costumecost = result.cost
   - let costumesize = result.size
 
-  div.row(class='mb-2')
-    div.mr-1 ID is
-      div #{costumeid}
+  div.row(class='mb-2 justify-content-center') 
+    div.col-md-6
 
-  - let actionid = "/resource/jackets/" + costumeid
-  form(id='CostumeForm', action= actionid, method="PUT")
-    div.form-group
-      label.costumeAttr(for='costume_type') Jacket type
-      input#costume_type(type='text', name='costume_type', value= costume_type )
+      div.row
+        div.mr-1 ID is
+          div #{costumeid}
 
-    div.form-group
-      label.costumeAttr(for='size') Jacket size
-      input#size(type='text', name='size', value= costumesize )
+      - let actionid = "/resource/jackets/" + costumeid
+      form(id='CostumeForm', action= actionid, method="PUT")
+        div.form-group
+          label.costumeAttr(for='costume_type') Jacket type
+          input#costume_type.form-control(type='text', name='costume_type', value= costume_type )
 
-    div.form-group
-      label.costumeAttr(for='cost') Jacket cost
-      input#cost(type='number', name='cost', value= costumecost )
+        div.form-group
+          label.costumeAttr(for='size') Jacket size
+          input#size.form-control(type='text', name='size', value= costumesize )
 
-    input(type="submit")
+        div.form-group
+          label.costumeAttr(for='cost') Jacket cost
+          input#cost.form-control(type='number', name='cost', value= costumecost )
+
+        button.btn.btn-primary(type="submit") Update Jacket
 
   script.
     document.forms['CostumeForm'].addEventListener('submit', (event) => {
       event.preventDefault();
-      // TODO do something here to show user that form is being submitted
+      // TODO do something here to show the user that the form is being submitted
       fetch(event.target.action, {
         method: 'PUT',
         body: new URLSearchParams(new FormData(event.target)) // event.target is the form
       }).then((resp) => {
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
-        alert("Jacket updated successfully")
+        alert("Jacket updated successfully");
         // TODO handle body
       }).catch((error) => {
         // TODO handle error
-        alert("Update failed " + error)
+        alert("Update failed " + error);
       });
     });
-
