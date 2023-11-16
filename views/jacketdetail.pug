@@ -2,24 +2,27 @@ extends layout
 
 block content
   h1= title
-  - let costumeid = result._id
-  - let costume_type = result.costume_type
-  - let costumecost = result.cost
-  - let costumesize = result.size
-  div
-    div.row
-      div(class='costumeAttr mr-3') Jacket ID is: 
-      div #{costumeid}
+  if (result == null)
+    h2 No instance to show details of the jacket
+  else
+    - let costumeid = result._id
+    - let costume_type = result.costume_type
+    - let costumecost = result.cost
+    - let costumesize = result.size
 
-    div.row
-      div(class='costumeAttr mr-3') Jacket Type is: 
-      div #{costume_type}
+    div
+      div.row
+        div(class='costumeAttr mr-3') Jacket ID is: 
+          div #{costumeid}
 
-    div.row
-      div(class='costumeAttr mr-3') Jacket Size is:
-      div #{costumesize}
+      div.row
+        div(class='costumeAttr mr-3') Jacket Type is: 
+          div #{costume_type}
+
+      div.row
+        div(class='costumeAttr mr-3') Jacket Size is:
+          div #{costumesize}
     
-    div.row
-      div(class='costumeAttr mr-3') Jacket Cost is: 
-      div #{costumecost}
-       
+      div.row
+        div(class='costumeAttr mr-3') Jacket Cost is: 
+          div #{costumecost}
