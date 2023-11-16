@@ -114,10 +114,11 @@ exports.costume_view_one_Page = async function (req, res) {
 // Handle building the view for updating a costume.
 // query provides the id
 exports.costume_update_Page = async function (req, res) {
-    const id = new ObjectId(req.query.id);
-    console.log("update view for item " + id)
+    console.log("update view for item " + req.query.id)
     try {
-        let result = await Costume.findById(id)
+        const id = new ObjectId(req.query.id);
+        let result = await Costume.findById(id); 
+
         res.render('jacketupdate', { title: 'Jacket Update', result: result });
     }
     catch (err) {
@@ -126,13 +127,16 @@ exports.costume_update_Page = async function (req, res) {
     }
 };
 
+
+
 // Handle a delete one view with id from query
 exports.costume_delete_Page = async function (req, res) {
     const id = new ObjectId(req.query.id);
     console.log("Delete view for id " + id)
     try {
         result = await Costume.findById(id)
-        res.render('jacketdelete', { title: 'Jacket Delete', result: result
+        res.render('jacketdelete', {
+            title: 'Jacket Delete', result: result
         });
     }
     catch (err) {
