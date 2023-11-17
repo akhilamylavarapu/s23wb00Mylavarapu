@@ -56,6 +56,8 @@ var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
 var coustumeRouter = require('./models/jackets');
 var resourseRouter = require('./routes/resource');
+var Account =require('./models/account');
+
 
 
 
@@ -103,5 +105,9 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 module.exports = app;
