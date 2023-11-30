@@ -3,19 +3,15 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const accountSchema = new Schema({
-  username: {
-    type: String,
-    required: [true, "Username is required"],
-    unique: [true, "Username must be unique"],
-    minlength: [5, "Username must be at least 5 characters long"],
-    maxlength: [20, "Username cannot be longer than 20 characters"],
-  },
+  username: String,
   password: {
     type: String,
-    required: [true, "Password is required"],
-    minlength: [8, "Password must be at least 8 characters long"],
-    maxlength: [255, "Password cannot be longer than 255 characters"],
-  },
+    // Add a regex pattern for the password
+//     At least 8 characters long.
+// Must contain at least one letter (uppercase or lowercase).
+// Must contain at least one digit.
+    match: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+  }
 });
 
 accountSchema.plugin(passportLocalMongoose);
