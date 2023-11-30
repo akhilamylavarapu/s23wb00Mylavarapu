@@ -47,7 +47,12 @@ block content
         }).then((resp) => {
           return resp.json(); // or resp.text() or whatever the server sends
         }).then((body) => {
-          alert("Jacket updated successfully");
+          if (body._id) {
+            alert("Jacket updated successfully");
+          }
+          else {
+            alert(body.error);
+          }
           // TODO handle body
         }).catch((error) => {
           // TODO handle error

@@ -1,46 +1,26 @@
-//- extends layout
-
-//- block content
-//-   h1= title
-
-//-   div(class="container-fluid")
-//-     div(class="row")
-//-       - for(let i = 0; i < results.length; i++){
-//-         div(class="col-sm-2", style = 'cursor: pointer;', id = `res-${i}`) 
-//-           p JacketName: #{results[i].jacketNames}
-//-           p JacketCost: $#{results[i].jacketCost}
-//-           p JacketSize: #{results[i].jacketSize}
-
-//-         script.
-//-           document.getElementById(`res-${i}`).addEventListener('click', function() {
-//-             buy(i); 
-//-           });
-//-       - }
-//-     script.
-//-       function buy(index){
-//-         alert(`You purchased item ${index}`)
-//-       }
-
-
 extends layout
 
 block content
   h1= title
   - let jackets = results;
+  - let createDestination = `/jackets/create`
 
-  div(class="container-fluid")
-      each jacket in jackets
-        - let destination = `dispatch("/jackets/update?id=${jacket._id}")`
-        div(class="col-sm-2")
-          p JacketName: #{jacket.costume_type}
-          p JacketCost: $#{jacket.cost}
-          p JacketSize: #{jacket.size}
-        button.btn.btn-sm.btn-primary.ml-1(onclick= destination) Update
-        br 
-        br
+  div(class="container")
+    div(class="mb-3 text-center")
+      a.btn.btn-primary(href=createDestination) Create
 
-  script.
-    function dispatch(path) {
-      window.location.href = path;
-    }
+    each jacket in jackets
+      - let updateDestination = `/jackets/update?id=${jacket._id}`
+      - let detailDestination = `/jackets/detail?id=${jacket._id}`
+      - let deleteDestination = `/jackets/delete?id=${jacket._id}`
 
+      div(class="card mb-3")
+        div(class="card-body")
+          h5(class="card-title") #{jacket.costume_type}
+          p(class="card-text") Cost: $#{jacket.cost}
+          p(class="card-text") Size: #{jacket.size}
+          
+          div(class="btn-group" role="group")
+            a.btn.btn-primary(href=updateDestination) Update
+            a.btn.btn-success(href=detailDestination) Detail
+            a.btn.btn-danger(href=deleteDestination) Delete
